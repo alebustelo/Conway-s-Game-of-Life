@@ -54,44 +54,52 @@ void computeTurn() {
             if (i > 0) { // check non-corner/edge cases first
                 if (thisTurn[i-1][j]) {
                     liveNeighbors++;
-                    if (j > 0) {
-                        if (thisTurn[i-1][j-1]) {
-                            liveNeighbors++;
-                        }
+                    printf("%c", 'a');
+                }
+                if (j > 0) {
+                    if (thisTurn[i-1][j-1]) {
+                        liveNeighbors++;
+                        printf("%c", 'b');
                     }
-                    if (j < MAX_X - 1) {
-                        if (thisTurn[i-1][j+1]) {
-                            liveNeighbors++;
-                        }
+                }
+                if (j < MAX_X - 1) {
+                    if (thisTurn[i-1][j+1]) {
+                        liveNeighbors++;
+                        printf("%c", 'c');
                     }
                 }
             }
             if (i < MAX_Y - 1) {
                 if (thisTurn[i+1][j]) {
                     liveNeighbors++;
+                    printf("%c", 'd');
                 }
                 if (j > 0) {
                     if (thisTurn[i+1][j-1]) {
                         liveNeighbors++;
+                        printf("%c", 'e');
                     }
                 }
                 if (j < MAX_X - 1) {
                     if (thisTurn[i+1][j+1]) {
                         liveNeighbors++;
+                        printf("%c", 'f');
                     }
                 }
             }
             if (j > 0) {
                 if (thisTurn[i][j-1]) {
                     liveNeighbors++;
+                    printf("%c", 'g');
                 }
             }
             if (j < MAX_X - 1) {
                 if (thisTurn[i][j+1]) {
                     liveNeighbors++;
+                    printf("%c", 'h');
                 }
             }
-
+            printf("%c", '\n');
             printf("Cell (%d,%d), isAlive value %d, neighbors %d \n", j, i, isAlive, liveNeighbors);
             if ( ( liveNeighbors == 2 || liveNeighbors == 3) && isAlive ) {
                 nextTurn[i][j] = isAlive;
