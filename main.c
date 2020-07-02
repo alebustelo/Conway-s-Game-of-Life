@@ -1,10 +1,14 @@
 // Alejandro Bustelo, 2020
 
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 
 #define MAX_X 5
 #define MAX_Y 5
+
+char debug = 0;
+
 // int Universe[MAX_X][MAX_Y];
 int thisTurn[MAX_Y][MAX_X] = {
     {0,1,0,0,0},
@@ -25,6 +29,7 @@ int nextTurn[MAX_Y][MAX_X] = {
 void advanceTurn();
 void computeTurn();
 void drawScreen();
+void printDebugLog(char *log);
 
 int main() {
     drawScreen();
@@ -34,6 +39,12 @@ int main() {
         drawScreen();
     }
     return 0;
+}
+
+void printDebugLog(char *log) {
+    if (debug) {
+        printf("%s", log);
+    }
 }
 
 void advanceTurn() {
@@ -54,53 +65,64 @@ void computeTurn() {
             if (i > 0) { // check non-corner/edge cases first
                 if (thisTurn[i-1][j]) {
                     liveNeighbors++;
-                    printf("%c", 'a');
+                    //printf("%c", 'a');
+                    printDebugLog("a");
                 }
                 if (j > 0) {
                     if (thisTurn[i-1][j-1]) {
                         liveNeighbors++;
-                        printf("%c", 'b');
+                        //printf("%c", 'b');
+                        printDebugLog("b");
                     }
                 }
                 if (j < MAX_X - 1) {
                     if (thisTurn[i-1][j+1]) {
                         liveNeighbors++;
-                        printf("%c", 'c');
+                        //printf("%c", 'c');
+                        printDebugLog("c");
                     }
                 }
             }
             if (i < MAX_Y - 1) {
                 if (thisTurn[i+1][j]) {
                     liveNeighbors++;
-                    printf("%c", 'd');
+                    //printf("%c", 'd');
+                    printDebugLog("d");
                 }
                 if (j > 0) {
                     if (thisTurn[i+1][j-1]) {
                         liveNeighbors++;
-                        printf("%c", 'e');
+                        //printf("%c", 'e');
+                        printDebugLog("e");
                     }
                 }
                 if (j < MAX_X - 1) {
                     if (thisTurn[i+1][j+1]) {
                         liveNeighbors++;
-                        printf("%c", 'f');
+                        //printf("%c", 'f');
+                        printDebugLog("f");
                     }
                 }
             }
             if (j > 0) {
                 if (thisTurn[i][j-1]) {
                     liveNeighbors++;
-                    printf("%c", 'g');
+                    //printf("%c", 'g');
+                    printDebugLog("g");
                 }
             }
             if (j < MAX_X - 1) {
                 if (thisTurn[i][j+1]) {
                     liveNeighbors++;
-                    printf("%c", 'h');
+                    //printf("%c", 'h');
+                    printDebugLog("h");
                 }
             }
-            printf("%c", '\n');
-            printf("Cell (%d,%d), isAlive value %d, neighbors %d \n", j, i, isAlive, liveNeighbors);
+            //printf("%c", '\n');
+            printDebugLog("\n");
+            if (debug) {
+                printf("Cell (%d,%d), isAlive value %d, neighbors %d \n", j, i, isAlive, liveNeighbors);
+            }
             if ( ( liveNeighbors == 2 || liveNeighbors == 3) && isAlive ) {
                 nextTurn[i][j] = isAlive;
             } else if ( liveNeighbors == 3 && isAlive == 0 ) {
