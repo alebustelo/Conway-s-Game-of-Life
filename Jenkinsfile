@@ -6,7 +6,8 @@ pipeline {
   stages {
     stage('compile') {
       steps {
-        sh 'make'
+        //sh 'make'
+        sh 'gcc -o gol.o main.c -I. -std=c99'
       }
       post {
         success {
