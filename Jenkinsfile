@@ -1,3 +1,4 @@
+// FYI: Jenkins does not like apostrophes in job names
 pipeline {
   agent any
   options {
@@ -6,8 +7,7 @@ pipeline {
   stages {
     stage('compile') {
       steps {
-        //sh 'make'
-        sh 'gcc -o gol.o main.c -I. -std=c99'
+        sh 'make'
       }
       post {
         success {
