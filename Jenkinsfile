@@ -14,10 +14,11 @@ pipeline {
         }
       }
     }
-    stage('take for a spin') {
-      steps {
-        sh './gol'
-      }
-    }
+    // Will run forever
+    // stage('take for a spin') {
+    //   steps {
+    //     sh './gol'
+    //   }
+    // }
   }
 }
